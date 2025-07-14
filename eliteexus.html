@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Nexus | Premium Digital Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary-color: #3a86ff;
+            --primary-dark: #2667cc;
+            --secondary-color: #8338ec;
+            --accent-color: #ff006e;
+            --text-dark: #0a0a0a;
+            --text-light: #6c757d;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --black: #000000;
+            --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --gradient-accent: linear-gradient(135deg, var(--accent-color), #fb5607);
+            --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 15px 50px rgba(0, 0, 0, 0.15);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 16px;
+            --border-radius-lg: 24px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            line-height: 1.7;
+            color: var(--text-dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+        
+        /* Glassmorphism Elements */
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        /* Modern Header with Glass Navbar */
+        header {
+            background: var(--white);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .header-scrolled {
+            box-shadow: var(--shadow-sm);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: var(--gradient-primary);
+            color: var(--white);
+            font-size: 20px;
+            font-weight: 700;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            font-size: 16px;
+            letter-spacing: -0.1px;
+            position: relative;
+            padding: 8px 4px;
+        }
+        
+        .nav-links a:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-accent);
+            transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .nav-links a:hover:before {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .cta-button {
+            background: var(--gradient-primary);
+            color: var(--white);
+            padding: 14px 30px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: var(--transition);
+            letter-spacing: -0.2px;
+            box-shadow: 0 8px 20px rgba(58, 134, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-accent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .cta-button:hover {
+            box-shadow: 0 12px 30px rgba(58, 134, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .cta-button:hover:after {
+            opacity: 1;
+        }
+        
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-dark);
+            transition: var(--transition);
+            padding: 8px;
+            border-radius: 8px;
+        }
+        
+        .mobile-menu-btn:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Hero Section - Ultra Modern */
+        .hero {
+            padding: 180px 0 120px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(58, 134, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: -1;
+            animation: pulse 12s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.2; }
+            100% { transform: scale(1.1); opacity: 0.4; }
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            position: relative;
+            height: 500px;
+        }
+        
+        .hero-image:before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-primary);
+            opacity: 0.15;
+            z-index: 1;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+        }
+        
+        .hero-image:hover img {
+            transform: scale(1.05) rotate(1deg);
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            line-height: 1.15;
+            letter-spacing: -1.5px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 600px;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+        
+        .cta-button-outline {
+            background-color: transparent;
+            color: var(--primary-color);
+            padding: 14px 30px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            border: 2px solid var(--primary-color);
+            transition: var(--transition);
+            letter-spacing: -0.2px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cta-button-outline:hover {
+            background-color: rgba(58, 134, 255, 0.08);
+            transform: translateY(-3px);
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        .stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .stat-item {
+            position: relative;
+        }
+        
+        .stat-item:not(:last-child):after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 40px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+        
+        /* Features Section - Card Grid */
+        .features {
+            padding: 120px 0;
+            background-color: var(--bg-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .features:before {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(131, 56, 236, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: 0;
+            animation: pulse 15s infinite alternate;
+            animation-delay: 2s;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title h2 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 19px;
+            line-height: 1.8;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            color: var(--white);
+            font-size: 34px;
+            box-shadow: 0 10px 20px rgba(58, 134, 255, 0.2);
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+        
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 17px;
+        }
+        
+        /* Testimonials - Modern Slider */
+        .testimonials {
+            padding: 120px 0;
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .testimonials:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(58, 134, 255, 0.04), rgba(131, 56, 236, 0.04));
+            z-index: 0;
+            clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+        }
+        
+        .testimonial-slider {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial {
+            background-color: var(--white);
+            padding: 60px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-lg);
+            margin: 0 40px;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 40px;
+            font-size: 22px;
+            font-style: italic;
+            color: var(--text-dark);
+            line-height: 1.8;
+            position: relative;
+            font-weight: 500;
+        }
+        
+        .testimonial-content:before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            left: 0;
+            font-size: 80px;
+            color: rgba(58, 134, 255, 0.1);
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .author-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(58, 134, 255, 0.1);
+        }
+        
+        .author-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h4 {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            font-size: 18px;
+        }
+        
+        .author-info p {
+            color: var(--text-light);
+            font-size: 16px;
+        }
+        
+        /* CTA Section - Gradient Background */
+        .cta {
+            padding: 140px 0;
+            background: var(--gradient-primary);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta:before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--gradient-accent);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            opacity: 0.1;
+            filter: blur(50px);
+            animation: floating 10s infinite alternate;
+        }
+        
+        .cta:after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            right: -100px;
+            width: 400px;
+            height: 400px;
+            background: var(--gradient-accent);
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            opacity: 0.1;
+            filter: blur(60px);
+            animation: floating 15s infinite alternate-reverse;
+            animation-delay: 1s;
+        }
+        
+        @keyframes floating {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(50px, 50px) rotate(30deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        
+        .cta h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+            font-size: 20px;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta .cta-button {
+            background: var(--white);
+            color: var(--primary-color);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+        
+        .cta-button-white {
+            background: transparent;
+            color: var(--white);
+            padding: 14px 30px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: var(--transition);
+            letter-spacing: -0.2px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .cta-button-white:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        /* Footer - Modern Design */
+        footer {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 120px 0 40px;
+            position: relative;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 60px;
+            margin-bottom: 80px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            position: relative;
+            letter-spacing: -0.5px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-accent);
+        }
+        
+        .footer-logo {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 24px;
+            display: inline-block;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .footer-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 16px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 16px;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            font-size: 20px;
+        }
+        
+        .social-links a:hover {
+            background: var(--gradient-primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(58, 134, 255, 0.3);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 48px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                text-align: center;
+                margin-bottom: 60px;
+            }
+            
+            .hero p {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .stats {
+                justify-content: center;
+            }
+            
+            .hero-image {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 820px) {
+            .nav-links {
+                gap: 24px;
+            }
+            
+            .nav-container {
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 90px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 20px;
+                box-shadow: var(--shadow-md);
+                border-radius: 0 0 var(--border-radius) var(--border-radius);
+                transform: translateY(-150%);
+                transition: transform 0.4s ease-out;
+                z-index: 999;
+                gap: 30px;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 42px;
+                line-height: 1.2;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title h2 {
+                font-size: 36px;
+            }
+            
+            .feature-card {
+                padding: 30px;
+            }
+            
+            .testimonial {
+                padding: 40px 30px;
+            }
+            
+            .cta h2 {
+                font-size: 36px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
+            }
+            
+            .footer-content {
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 24px;
+            }
+            
+            .hero {
+                padding: 160px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 30px;
+                margin-top: 40px;
+                border: none;
+            }
+            
+            .stat-item:not(:last-child):after {
+                display: none;
+            }
+            
+            .features {
+                padding: 80px 0;
+            }
+            
+            .testimonials {
+                padding: 80px 0;
+            }
+            
+            .testimonial-content {
+                font-size: 18px;
+            }
+            
+            .cta {
+                padding: 100px 0;
+            }
+            
+            footer {
+                padding: 80px 0 30px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Modern Glass Navbar -->
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <div class="logo-icon">EN</div>
+                    <div class="logo-text">EliteNexus</div>
+                </a>
+                <div class="nav-container">
+                    <div class="nav-links">
+                        <a href="#">Home</a>
+                        <a href="#services">Services</a>
+                        <a href="#about">About</a>
+                        <a href="#work">Work</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                    <a href="#" class="cta-button">
+                        <span>Get Started</span>
+                    </a>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Floating Elements -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="animate__animated animate__fadeInUp">Redefining Digital Excellence</h1>
+                    <p class="animate__animated animate__fadeInUp animate__delay-1s">We craft immersive digital experiences that transform businesses and leave lasting impressions on users.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="cta-button animate__animated animate__fadeInUp animate__delay-2s">
+                            <span>Start a Project</span>
+                        </a>
+                        <a href="#" class="cta-button-outline animate__animated animate__fadeInUp animate__delay-2s">
+                            <i class="fas fa-play-circle"></i>
+                            Watch Showreel
+                        </a>
+                    </div>
+                    <div class="stats animate__animated animate__fadeInUp animate__delay-3s">
+                        <div class="stat-item">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">Happy Clients</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">99%</div>
+                            <div class="stat-label">Success Rate</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">8x</div>
+                            <div class="stat-label">ROI Average</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image animate__animated animate__fadeIn animate__delay-1s">
+                    <img src="https://images.unsplash.com/photo-1555421689-3f034debb7a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" alt="Digital team collaborating">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features/Services Section -->
+    <section class="features" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="animate__animated animate__fadeInUp">Our Premium Services</h2>
+                <p class="animate__animated animate__fadeInUp animate__delay-1s">We offer end-to-end digital solutions that drive measurable results and exceed expectations.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate__animated animate__fadeInUp">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Brand Design</h3>
+                    <p>Craft unique visual identities that capture your essence and stand out in competitive markets.</p>
+                </div>
+                <div class="feature-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>High-performance websites built with cutting-edge technologies for unparalleled user experiences.</p>
+                </div>
+                <div class="feature-card animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>App Development</h3>
+                    <p>Innovative mobile applications that engage users and solve real business challenges.</p>
+                </div>
+                <div class="feature-card animate__animated animate__fadeInUp">
+                    <div class="feature-icon">
+                        <i class="fas fa-search-dollar"></i>
+                    </div>
+                    <h3>SEO & Marketing</h3>
+                    <p>Data-driven strategies that increase visibility, traffic, and conversions for your business.</p>
+                </div>
+                <div class="feature-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics</h3>
+                    <p>Actionable insights from your data to make informed decisions and optimize performance.</p>
+                </div>
+                <div class="feature-card animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI Solutions</h3>
+                    <p>Harness the power of artificial intelligence to automate processes and enhance operations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2 class="animate__animated animate__fadeInUp">Trusted By Industry Leaders</h2>
+                <p class="animate__animated animate__fadeInUp animate__delay-1s">Don't just take our word for it. Here's what our clients have to say about working with us.</p>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial animate__animated animate__fadeIn">
+                    <div class="testimonial-content">
+                        EliteNexus transformed our digital presence beyond recognition. Their strategic vision combined with flawless execution resulted in a 300% increase in our online revenue within just six months. Their team became an extension of our own, truly understanding our business objectives.
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Jessica Thompson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Jessica Thompson</h4>
+                            <p>CEO, TechVisionary</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section with Animated Shapes -->
+    <section class="cta" id="contact">
+        <div class="container">
+            <h2 class="animate__animated animate__fadeInUp">Ready to Elevate Your Digital Presence?</h2>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">Let's discuss how we can transform your ideas into extraordinary digital experiences that drive results.</p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-button animate__animated animate__fadeInUp animate__delay-2s">
+                    <span>Get a Free Quote</span>
+                </a>
+                <a href="#" class="cta-button-white animate__animated animate__fadeInUp animate__delay-2s">
+                    <i class="fas fa-phone-alt"></i>
+                    Schedule a Call
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">EliteNexus</div>
+                    <p class="footer-description">We're a digital transformation agency focused on creating meaningful experiences that drive business growth.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Brand Strategy</a></li>
+                        <li><a href="#">UI/UX Design</a></li>
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Mobile Applications</a></li>
+                        <li><a href="#">Digital Marketing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Our Story</a></li>
+                        <li><a href="#">Meet the Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">hi@elitenexus.io</a></li>
+                        <li><a href="#">+1 (555) 789-1234</a></li>
+                        <li><a href="#">Visit Our Studio</a></li>
+                        <li><a href="#">Start a Project</a></li>
+                        <li><a href="#">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 EliteNexus. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Cookie Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            this.innerHTML = navLinks.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Header Scroll Effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 90,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                }
+            });
+        });
+        
+        // Testimonial Slider
+        let currentTestimonial = 0;
+        const testimonials = [
+            {
+                quote: "EliteNexus transformed our digital presence beyond recognition. Their strategic vision combined with flawless execution resulted in a 300% increase in our online revenue within just six months. Their team became an extension of our own, truly understanding our business objectives.",
+                name: "Jessica Thompson",
+                title: "CEO, TechVisionary",
+                image: "https://randomuser.me/api/portraits/women/65.jpg"
+            },
+            {
+                quote: "The mobile application developed by EliteNexus exceeded all our expectations. With over 2 million downloads and a 4.9-star rating, it has become our most powerful customer engagement tool. Their attention to detail is unmatched in the industry.",
+                name: "Michael Rodriguez",
+                title: "CTO, AppVenture",
+                image: "https://randomuser.me/api/portraits/men/65.jpg"
+            },
+            {
+                quote: "Working with EliteNexus was a game-changer for our startup. Their rebranding strategy positioned us as a market leader, while their technical solutions scaled perfectly with our rapid growth. ROI from their work continues to multiply quarter after quarter.",
+                name: "Sarah Chen",
+                title: "Founder, NexGen Tech",
+                image: "https://randomuser.me/api/portraits/women/45.jpg"
+            }
+        ];
+        
+        function updateTestimonial() {
+            const testimonial = testimonials[currentTestimonial];
+            const testimonialElement = document.querySelector('.testimonial');
+            
+            testimonialElement.classList.remove('animate__fadeIn');
+            void testimonialElement.offsetWidth; // Trigger reflow
+            testimonialElement.classList.add('animate__animated', 'animate__fadeIn');
+            
+            setTimeout(() => {
+                testimonialElement.innerHTML = `
+                    <div class="testimonial-content">${testimonial.quote}</div>
+                    <div class="testimonial-author">
+                        <div class="author-image">
+                            <img src="${testimonial.image}" alt="${testimonial.name}">
+                        </div>
+                        <div class="author-info">
+                            <h4>${testimonial.name}</h4>
+                            <p>${testimonial.title}</p>
+                        </div>
+                    </div>
+                `;
+            }, 300);
+            
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        }
+        
+        // Initialize testimonial slider
+        updateTestimonial();
+        setInterval(updateTestimonial, 6000);
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate__animated');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    const animationClass = element.classList[1];
+                    element.classList.add(animationClass);
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Trigger on load
+        
+        // Hero image hover animation
+        const heroImage = document.querySelector('.hero-image');
+        heroImage.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            heroImage.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+        
+        heroImage.addEventListener('mouseenter', () => {
+            heroImage.style.transition = 'none';
+        });
+        
+        heroImage.addEventListener('mouseleave', () => {
+            heroImage.style.transition = 'transform 0.5s ease';
+            heroImage.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        });
+    </script>
+</body>
+</html>
