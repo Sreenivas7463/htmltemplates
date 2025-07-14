@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitHome - Your Home Fitness Solution</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .workout-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .nav-link::after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width .3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.5s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        
+        .page-container {
+            display: none;
+        }
+        
+        .page-container.active {
+            display: block;
+        }
+        
+        .nav-highlight {
+            position: relative;
+        }
+        
+        .nav-highlight::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: white;
+            left: 0;
+            bottom: -5px;
+        }
+        
+        .trainer-card:hover .trainer-social {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg fixed w-full z-50">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <i class="fas fa-dumbbell text-2xl"></i>
+                <span class="text-xl font-bold">FitHome</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="nav-link nav-item" data-page="home">Home</a>
+                <a href="#" class="nav-link nav-item" data-page="programs">Programs</a>
+                <a href="#" class="nav-link nav-item" data-page="about">About Us</a>
+                <a href="#" class="nav-link nav-item" data-page="team">Our Team</a>
+                <a href="#" class="nav-link nav-item" data-page="pricing">Pricing</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button class="px-4 py-2 rounded-full bg-white text-purple-700 font-semibold hover:bg-purple-100 transition">Sign In</button>
+                <button class="md:hidden text-white focus:outline-none" id="mobile-menu-btn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-purple-800" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-purple-700 nav-item" data-page="home">Home</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-purple-700 nav-item" data-page="programs">Programs</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-purple-700 nav-item" data-page="about">About Us</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-purple-700 nav-item" data-page="team">Our Team</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-white hover:bg-purple-700 nav-item" data-page="pricing">Pricing</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page-container active">
+        <!-- Hero Section -->
+        <section id="home" class="gradient-bg text-white pt-32 pb-20">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0 animate-fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">Transform Your Body At Home</h1>
+                    <p class="text-xl mb-8">Professional workouts designed for your home space. No equipment needed to get started.</p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <button class="px-8 py-3 rounded-full bg-white text-purple-700 font-semibold hover:bg-purple-100 transition transform hover:scale-105">Start Free Trial</button>
+                        <button class="px-8 py-3 rounded-full border-2 border-white text-white font-semibold hover:bg-white hover:text-purple-700 transition transform hover:scale-105">Watch Demo</button>
+                    </div>
+                </div>
+                <div class="md:w-1/2 animate-fade-in delay-100">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Woman exercising at home" class="rounded-lg shadow-2xl">
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="bg-white py-16">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div class="animate-fade-in delay-200">
+                        <div class="text-4xl font-bold text-purple-700 mb-2">10,000+</div>
+                        <div class="text-gray-600">Active Members</div>
+                    </div>
+                    <div class="animate-fade-in delay-300">
+                        <div class="text-4xl font-bold text-purple-700 mb-2">500+</div>
+                        <div class="text-gray-600">Workout Videos</div>
+                    </div>
+                    <div class="animate-fade-in delay-400">
+                        <div class="text-4xl font-bold text-purple-700 mb-2">24/7</div>
+                        <div class="text-gray-600">Expert Support</div>
+                    </div>
+                    <div class="animate-fade-in delay-500">
+                        <div class="text-4xl font-bold text-purple-700 mb-2">30</div>
+                        <div class="text-gray-600">Day Free Trial</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Preview Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Our Popular Fitness Programs</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">Choose from a variety of programs tailored to your fitness level and goals.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Program 1 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300">
+                        <div class="h-48 bg-purple-100 flex items-center justify-center">
+                            <i class="fas fa-fire text-6xl text-purple-600"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">HIIT Burn</h3>
+                            <p class="text-gray-600 mb-4">High intensity interval training to maximize fat burn in minimal time.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 20-30 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 4 weeks</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Program 2 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300">
+                        <div class="h-48 bg-blue-100 flex items-center justify-center">
+                            <i class="fas fa-dumbbell text-6xl text-blue-600"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Strength Builder</h3>
+                            <p class="text-gray-600 mb-4">Build lean muscle with bodyweight exercises and minimal equipment.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 30-45 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 6 weeks</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Program 3 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300">
+                        <div class="h-48 bg-green-100 flex items-center justify-center">
+                            <i class="fas fa-spa text-6xl text-green-600"></i>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Yoga Flow</h3>
+                            <p class="text-gray-600 mb-4">Improve flexibility, balance and mindfulness with daily yoga sessions.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 30-60 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 8 weeks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button class="px-8 py-3 rounded-full gradient-bg text-white font-semibold hover:opacity-90 transition transform hover:scale-105 nav-item" data-page="programs">View All Programs</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="App features" class="rounded-lg shadow-xl">
+                    </div>
+                    <div class="md:w-1/2 md:pl-12">
+                        <h2 class="text-3xl font-bold mb-6">Why Choose FitHome?</h2>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-purple-100 rounded-full p-3 mr-4">
+                                    <i class="fas fa-user-md text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Expert Trainers</h3>
+                                    <p class="text-gray-600">Our certified trainers design all workouts to ensure safety and effectiveness.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-blue-100 rounded-full p-3 mr-4">
+                                    <i class="fas fa-mobile-alt text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Mobile App</h3>
+                                    <p class="text-gray-600">Track your progress, schedule workouts, and access programs anywhere.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-green-100 rounded-full p-3 mr-4">
+                                    <i class="fas fa-users text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Community Support</h3>
+                                    <p class="text-gray-600">Join our active community for motivation, challenges, and accountability.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Demo Section -->
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">See It In Action</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">Watch a sample workout to see how easy it is to get started.</p>
+                
+                <div class="max-w-4xl mx-auto rounded-xl overflow-hidden shadow-xl">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/UBMk30rjy0o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Success Stories</h2>
+                <p class="text-gray-600 text-center max-w-2xl mx-auto mb-12">Hear from our members who transformed their lives with FitHome.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-md">
+                        <div class="flex items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah J." class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-bold">Sarah J.</h4>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"I lost 25 pounds in 3 months with the HIIT program. The workouts are challenging but so effective. Best investment in myself ever!"</p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-md">
+                        <div class="flex items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael T." class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-bold">Michael T.</h4>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"As a busy dad, I love that I can get a great workout in my living room. The strength program helped me build muscle without a gym."</p>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="bg-gray-50 p-8 rounded-xl shadow-md">
+                        <div class="flex items-center mb-4">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Lisa M." class="w-12 h-12 rounded-full mr-4">
+                            <div>
+                                <h4 class="font-bold">Lisa M.</h4>
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600">"The yoga program has transformed my flexibility and reduced my back pain. The instructors are amazing at explaining each pose."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section id="pricing-page-section" class="py-20 gradient-bg text-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Simple, Transparent Pricing</h2>
+                <p class="text-center max-w-2xl mx-auto mb-12 opacity-90">Choose the plan that fits your goals and budget. Cancel anytime.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <!-- Basic Plan -->
+                    <div class="bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-6 border-b">
+                            <h3 class="text-xl font-bold mb-2">Basic</h3>
+                            <div class="flex items-end mb-4">
+                                <span class="text-4xl font-bold">$9</span>
+                                <span class="text-gray-600 ml-1">/month</span>
+                            </div>
+                            <p class="text-gray-600">Perfect for beginners starting their fitness journey.</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>Access to basic workouts</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>New workouts weekly</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>Email support</span>
+                                </li>
+                                <li class="flex items-center text-gray-400">
+                                    <i class="fas fa-times text-red-400 mr-2"></i>
+                                    <span>Personalized plans</span>
+                                </li>
+                                <li class="flex items-center text-gray-400">
+                                    <i class="fas fa-times text-red-400 mr-2"></i>
+                                    <span>Live classes</span>
+                                </li>
+                            </ul>
+                            <button class="w-full px-6 py-3 rounded-full border-2 border-purple-600 text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition">Get Started</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Popular Plan -->
+                    <div class="bg-white text-gray-800 rounded-xl shadow-xl overflow-hidden transform scale-105">
+                        <div class="bg-purple-600 text-white text-center py-2">
+                            <span class="font-semibold">MOST POPULAR</span>
+                        </div>
+                        <div class="p-6 border-b">
+                            <h3 class="text-xl font-bold mb-2">Pro</h3>
+                            <div class="flex items-end mb-4">
+                                <span class="text-4xl font-bold">$19</span>
+                                <span class="text-gray-600 ml-1">/month</span>
+                            </div>
+                            <p class="text-gray-600">Best value with full access to all features.</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>All basic features</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>Personalized workout plans</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>Live classes</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>Progress tracking</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>Priority support</span>
+                                </li>
+                            </ul>
+                            <button class="w-full px-6 py-3 rounded-full gradient-bg text-white font-semibold hover:opacity-90 transition">Get Started</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Family Plan -->
+                    <div class="bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden">
+                        <div class="p-6 border-b">
+                            <h3 class="text-xl font-bold mb-2">Family</h3>
+                            <div class="flex items-end mb-4">
+                                <span class="text-4xl font-bold">$29</span>
+                                <span class="text-gray-600 ml-1">/month</span>
+                            </div>
+                            <p class="text-gray-600">For households with up to 5 members.</p>
+                        </div>
+                        <div class="p-6">
+                            <ul class="space-y-3 mb-8">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>All pro features</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>Up to 5 user profiles</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>Family challenges</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>Kids workouts</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check text-green-500 mr-2"></i>
+                                    <span>Shared progress</span>
+                                </li>
+                            </ul>
+                            <button class="w-full px-6 py-3 rounded-full border-2 border-purple-600 text-purple-600 font-semibolf hover:bg-purple-600 hover:text-white transition">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <p class="opacity-90">Not sure? Try our <span class="font-bold">30-day free trial</span> with full access to all features.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 bg-gray-900 text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-6">Ready to Transform Your Body?</h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto opacity-90">Join thousands of members who achieved their fitness goals from the comfort of their homes.</p>
+                <button class="px-8 py-4 rounded-full gradient-bg text-white font-bold text-lg hover:opacity-90 transition transform hover:scale-105">Start Your 30-Day Free Trial</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Programs Page -->
+    <div id="programs-page" class="page-container">
+        <section class="gradient-bg text-white pt-32 pb-20">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Our Complete Fitness Programs</h1>
+                <p class="text-xl max-w-2xl mx-auto">Browse our full collection of expertly designed workout programs for all fitness levels.</p>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="mb-12 flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-6 md:mb-0">
+                        <h2 class="text-3xl font-bold">All Programs</h2>
+                        <p class="text-gray-600">Filter and find the perfect program for your goals</p>
+                    </div>
+                    <div class="flex space-x-4">
+                        <select class="px-4 py-2 rounded-full border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            <option>All Categories</option>
+                            <option>Cardio</option>
+                            <option>Strength</option>
+                            <option>Yoga</option>
+                            <option>HIIT</option>
+                        </select>
+                        <select class="px-4 py-2 rounded-full border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-purple-600">
+                            <option>All Levels</option>
+                            <option>Beginner</option>
+                            <option>Intermediate</option>
+                            <option>Advanced</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- HIIT Programs -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300 hover:shadow-xl">
+                        <div class="h-48 bg-purple-100 flex items-center justify-center relative">
+                            <i class="fas fa-fire text-6xl text-purple-600"></i>
+                            <div class="absolute bottom-0 left-0 bg-purple-600 text-white px-4 py-1 rounded-tr-lg">
+                                <span class="text-sm font-semibold">HIIT</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">HIIT Burn</h3>
+                            <p class="text-gray-600 mb-4">High intensity interval training to maximize fat burn in minimal time.</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 20-30 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 4 weeks</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">Beginner to Advanced</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300 hover:shadow-xl">
+                        <div class="h-48 bg-purple-100 flex items-center justify-center relative">
+                            <i class="fas fa-bolt text-6xl text-purple-600"></i>
+                            <div class="absolute bottom-0 left-0 bg-purple-600 text-white px-4 py-1 rounded-tr-lg">
+                                <span class="text-sm font-semibold">HIIT</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Tabata Blast</h3>
+                            <p class="text-gray-600 mb-4">Ultra-intense 4-minute Tabata workouts for maximum calorie burn.</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 15-20 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 3 weeks</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">Advanced</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Strength Programs -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300 hover:shadow-xl">
+                        <div class="h-48 bg-blue-100 flex items-center justify-center relative">
+                            <i class="fas fa-dumbbell text-6xl text-blue-600"></i>
+                            <div class="absolute bottom-0 left-0 bg-blue-600 text-white px-4 py-1 rounded-tr-lg">
+                                <span class="text-sm font-semibold">Strength</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Strength Builder</h3>
+                            <p class="text-gray-600 mb-4">Build lean muscle with bodyweight exercises and minimal equipment.</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 30-45 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 6 weeks</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Beginner</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300 hover:shadow-xl">
+                        <div class="h-48 bg-blue-100 flex items-center justify-center relative">
+                            <i class="fas fa-weight-hanging text-6xl text-blue-600"></i>
+                            <div class="absolute bottom-0 left-0 bg-blue-600 text-white px-4 py-1 rounded-tr-lg">
+                                <span class="text-sm font-semibold">Strength</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Power Core</h3>
+                            <p class="text-gray-600 mb-4">Develop a strong, stable core with targeted abdominal workouts.</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 25-35 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 4 weeks</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px=2.5 py-0.5 rounded">Intermediate</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Yoga Programs -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300 hover:shadow-xl">
+                        <div class="h-48 bg-green-100 flex items-center justify-center relative">
+                            <i class="fas fa-spa text-6xl text-green-600"></i>
+                            <div class="absolute bottom-0 left-0 bg-green-600 text-white px-4 py-1 rounded-tr-lg">
+                                <span class="text-sm font-semibold">Yoga</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Yoga Flow</h3>
+                            <p class="text-gray-600 mb-4">Improve flexibility, balance and mindfulness with daily yoga sessions.</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 30-60 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 8 weeks</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Beginner</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300 hover:shadow-xl">
+                        <div class="h-48 bg-green-100 flex items-center justify-center relative">
+                            <i class="fas fa-cloud text-6xl text-green-600"></i>
+                            <div class="absolute bottom-0 left-0 bg-green-600 text-white px-4 py-1 rounded-tr-lg">
+                                <span class="text-sm font-semibold">Yoga</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Power Yoga</h3>
+                            <p class="text-gray-600 mb-4">Dynamic yoga sequences to build strength and endurance.</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 45-60 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 6 weeks</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">Intermediate</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cardio Programs -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300 hover:shadow-xl">
+                        <div class="h-48 bg-red-100 flex items-center justify-center relative">
+                            <i class="fas fa-running text-6xl text-red-600"></i>
+                            <div class="absolute bottom-0 left-0 bg-red-600 text-white px-4 py-1 rounded-tr-lg">
+                                <span class="text-sm font-semibold">Cardio</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Cardio Kick</h3>
+                            <p class="text-gray-600 mb-4">High-energy cardio workout combining kickboxing and dance moves.</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 30-40 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 4 weeks</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-yellow-100 text-yellow-800 text-xs font-semibold px-2.5 py-0.5 rounded">Intermediate</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300 hover:shadow-xl">
+                        <div class="h-48 bg-red-100 flex items-center justify-center relative">
+                            <i class="fas fa-heartbeat text-6xl text-red-600"></i>
+                            <div class="absolute bottom-0 left-0 bg-red-600 text-white px-4 py-1 rounded-tr-lg">
+                                <span class="text-sm font-semibold">Cardio</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Endurance Challenge</h3>
+                            <p class="text-gray-600 mb-4">Build stamina and cardiovascular endurance with progressive workouts.</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 30-45 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 8 weeks</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Beginner</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Special Programs -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300 hover:shadow-xl">
+                        <div class="h-48 bg-yellow-100 flex items-center justify-center relative">
+                            <i class="fas fa-baby text-6xl text-yellow-600"></i>
+                            <div class="absolute bottom-0 left-0 bg-yellow-600 text-white px-4 py-1 rounded-tr-lg">
+                                <span class="text-sm font-semibold">Postnatal</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Postnatal Recovery</h3>
+                            <p class="text-gray-600 mb-4">Gentle exercises to rebuild strength and restore core after pregnancy.</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 20-30 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 12 weeks</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">Beginner</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden workout-card transition duration-300 hover:shadow-xl">
+                        <div class="h-48 bg-indigo-100 flex items-center justify-center relative">
+                            <i class="fas fa-child text-6xl text-indigo-600"></i>
+                            <div class="absolute bottom-0 left-0 bg-indigo-600 text-white px-4 py-1 rounded-tr-lg">
+                                <span class="text-sm font-semibold">Family</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2">Family Fitness</h3>
+                            <p class="text-gray-600 mb-4">Fun workouts designed for parents and kids to enjoy together.</p>
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm text-gray-500"><i class="fas fa-clock mr-1"></i> 15-25 min</span>
+                                <span class="text-sm text-gray-500"><i class="fas fa-calendar-alt mr-1"></i> 4 weeks</span>
+                            </div>
+                            <div class="flex items-center">
+                                <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">All Levels</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 flex justify-center">
+                    <nav class="inline-flex rounded-md shadow">
+                        <a href="#" class="px-4 py-2 rounded-l-md border border-gray-300 bg-white text-purple-700 font-medium hover:bg-gray-50">Previous</a>
+                        <a href="#" class="px-4 py-2 border-t border-b border-gray-300 bg-white text-purple-700 font-medium hover:bg-gray-50">1</a>
+                        <a href="#" class="px-4 py-2 border-t border-b border-gray-300 bg-purple-600 text-white font-medium">2</a>
+                        <a href="#" class="px-4 py-2 border-t border-b border-gray-300 bg-white text-purple-700 font-medium hover:bg-gray-50">3</a>
+                        <a href="#" class="px-4 py-2 border border-gray-300 bg-white text-purple-700 font-medium hover:bg-gray-50 rounded-r-md">Next</a>
+                    </nav>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Us Page -->
+    <div id="about-page" class="page-container">
+        <section class="gradient-bg text-white pt-32 pb-20">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">About FitHome</h1>
+                <p class="text-xl max-w-2xl mx-auto">Our mission is to make premium fitness accessible to everyone, anytime, anywhere.</p>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center mb-16">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="FitHome story" class="rounded-lg shadow-xl">
+                    </div>
+                    <div class="md:w-1/2 md:pl-12">
+                        <h2 class="text-3xl font-bold mb-6">Our Story</h2>
+                        <p class="text-gray-600 mb-4">FitHome was founded in 2018 by fitness enthusiasts who were frustrated with the limitations of traditional gym memberships. We believed that everyone deserves access to high-quality workouts, regardless of their schedule, location, or budget.</p>
+                        <p class="text-gray-600 mb-4">What started as a small collection of YouTube workouts has grown into a comprehensive digital fitness platform with expert-designed programs, personalized training, and an amazing community of members supporting each other.</p>
+                        <p class="text-gray-600">Today, FitHome has helped over 100,000 people achieve their fitness goals from the comfort of their homes. Our team of certified trainers continues to innovate, creating new and effective ways to make home workouts both enjoyable and results-driven.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row-reverse items-center">
+                    <div class="md:w-1/2 mb-10 md:mb-0">
+                        <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1375&q=80" alt="FitHome approach" class="rounded-lg shadow-xl">
+                    </div>
+                    <div class="md:w-1/2 md:pr-12">
+                        <h2 class="text-3xl font-bold mb-6">Our Approach</h2>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-purple-100 rounded-full p-3 mr-4">
+                                    <i class="fas fa-bullseye text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Results-Focused</h3>
+                                    <p class="text-gray-600">Every program is designed to deliver measurable results, whether your goal is weight loss, muscle gain, or improved mobility.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-blue-100 rounded-full p-3 mr-4">
+                                    <i class="fas fa-user-friends text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Community-Driven</h3>
+                                    <p class="text-gray-600">We believe fitness is better together. Our active community provides motivation, accountability, and support throughout your journey.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-green-100 rounded-full p-3 mr-4">
+                                    <i class="fas fa-sync-alt text-green-600"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-semibold mb-2">Sustainable Methods</h3>
+                                    <p class="text-gray-600">No extreme diets or unsustainable routines. We focus on balanced, long-term approaches that fit into real life.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold mb-4">Our Core Values</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">These principles guide everything we do at FitHome</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                        <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-heart text-purple-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Passion for Fitness</h3>
+                        <p class="text-gray-600">We genuinely love helping people discover the joy and benefits of an active lifestyle.</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                        <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-graduation-cap text-blue-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Evidence-Based</h3>
+                        <p class="text-gray-600">Our methods are grounded in exercise science and proven training principles.</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                        <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-hands-helping text-green-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Inclusive Community</h3>
+                        <p class="text-gray-600">We welcome all ages, body types, and fitness levels with respect and support.</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                        <div class="bg-yellow-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-lightbulb text-yellow-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Continuous Innovation</h3>
+                        <p class="text-gray-600">We're always evolving our programs based on member feedback and new research.</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                        <div class="bg-red-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-balance-scale text-red-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Balanced Approach</h3>
+                        <p class="text-gray-600">We promote fitness as part of a healthy lifestyle, not extreme regimens.</p>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-xl shadow-md text-center">
+                        <div class="bg-indigo-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-smile text-indigo-600 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Enjoyment First</h3>
+                        <p class="text-gray-600">If you're not having fun, you won't stick with it. We make workouts enjoyable!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Team Page -->
+    <div id="team-page" class="page-container">
+        <section class="gradient-bg text-white pt-32 pb-20">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Meet Our Team</h1>
+                <p class="text-xl max-w-2xl mx-auto">Certified fitness professionals dedicated to your success</p>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold mb-4">Our Expert Trainers</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">Each with unique specialties and a passion for helping you reach your goals</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Trainer 1 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md trainer-card transition duration-300 hover:shadow-xl">
+                        <div class="h-64 bg-purple-100 relative">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Jessica Smith" class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                                <h3 class="text-xl font-bold text-white">Jessica Smith</h3>
+                                <p class="text-purple-300">HIIT & Cardio Specialist</p>
+                            </div>
+                            <div class="absolute top-4 right-4 trainer-social opacity-0 transform translate-y-2 transition-all duration-300">
+                                <div class="flex space-x-2">
+                                    <a href="#" class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white hover:bg-purple-700">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">With 10+ years experience in high-intensity training, Jessica creates killer workouts that deliver fast results.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">HIIT</span>
+                                <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Tabata</span>
+                                <span class="text-xs bg-purple-100 text-purple-800 px=2 py-1 rounded">Fat Loss</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trainer 2 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md trainer-card transition duration-300 hover:shadow-xl">
+                        <div class="h-64 bg-blue-100 relative">
+                            <img src="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Marcus Chen" class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                                <h3 class="text-xl font-bold text-white">Marcus Chen</h3>
+                                <p class="text-blue-300">Strength & Conditioning Coach</p>
+                            </div>
+                            <div class="absolute top-4 right-4 trainer-social opacity-0 transform translate-y-2 transition-all duration-300">
+                                <div class="flex space-x-2">
+                                    <a href="#" class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white hover:bg-purple-700">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Former collegiate athlete who specializes in functional training and bodyweight strength programs.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Strength</span>
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Calisthenics</span>
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Core</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trainer 3 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md trainer-card transition duration-300 hover:shadow-xl">
+                        <div class="h-64 bg-green-100 relative">
+                            <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1376&q=80" alt="Priya Patel" class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                                <h3 class="text-xl font-bold text-white">Priya Patel</h3>
+                                <p class="text-green-300">Yoga & Mobility Expert</p>
+                            </div>
+                            <div class="absolute top-4 right-4 trainer-social opacity-0 transform translate-y-2 transition-all duration-300">
+                                <div class="flex space-x-2">
+                                    <a href="#" class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white hover:bg-purple-700">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Certified yoga instructor with a focus on mindful movement, flexibility, and stress reduction.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Yoga</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Mobility</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Meditation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trainer 4 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md trainer-card transition duration-300 hover:shadow-xl">
+                        <div class="h-64 bg-yellow-100 relative">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="David Johnson" class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                                <h3 class="text-xl font-bold text-white">David Johnson</h3>
+                                <p class="text-yellow-300">Senior Fitness Specialist</p>
+                            </div>
+                            <div class="absolute top-4 right-4 trainer-social opacity-0 transform translate-y-2 transition-all duration-300">
+                                <div class="flex space-x=2">
+                                    <a href="#" class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white hover:bg-purple-700">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Specializes in safe, effective workouts for older adults focusing on strength, balance and mobility.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Senior Fitness</span>
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px=2 py-1 rounded">Joint Health</span>
+                                <span class="text-xs bg-yellow-100 text-yellow-800 px=2 py-1 rounded">Low Impact</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trainer 5 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md trainer-card transition duration-300 hover:shadow-xl">
+                        <div class="h-64 bg-red-100 relative">
+                            <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1378&q=80" alt="Aisha Williams" class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                                <h3 class="text-xl font-bold text-white">Aisha Williams</h3>
+                                <p class="text-red-300">Pre/Postnatal Expert</p>
+                            </div>
+                            <div class="absolute top-4 right-4 trainer-social opacity-0 transform translate-y-2 transition-all duration-300">
+                                <div class="flex space-x-2">
+                                    <a href="#" class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white hover:bg-purple-700">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Certified in pregnancy and postpartum fitness with a focus on safe, effective movements.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Prenatal</span>
+                                <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Postpartum</span>
+                                <span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded">Core Rehab</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trainer 6 -->
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md trainer-card transition duration-300 hover:shadow-xl">
+                        <div class="h-64 bg-indigo-100 relative">
+                            <img src="https://images.unsplash.com/photo-1583864697781-a890e5b7e1de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80" alt="Carlos Mendez" class="w-full h-full object-cover">
+                            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+                                <h3 class="text-xl font-bold text-white">Carlos Mendez</h3>
+                                <p class="text-indigo-300">Nutrition Coach</p>
+                            </div>
+                            <div class="absolute top-4 right-4 trainer-social opacity-0 transform translate-y-2 transition-all duration-300">
+                                <div class="flex space-x-2">
+                                    <a href="#" class="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-white hover:bg-purple-700">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="#" class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white hover:bg-blue-700">
+                                        <i class="fab fa-linkedin-in"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-gray-600 mb-4">Registered dietitian who creates practical, sustainable nutrition plans to complement your fitness.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded">Nutrition</span>
+                                <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded">Meal Planning</span>
+                                <span class="text-xs bg-indigo-100 text-indigo-800 px-2 py-1 rounded">Weight Management</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-bold mb-4">Our Certifications</h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">All FitHome trainers hold current certifications from accredited organizations</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                    <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/3/3f/NASM_Logo.png" alt="NASM" class="h-12">
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/6/6f/ACE_logo.png" alt="ACE" class="h-12">
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/ACSM_logo.svg/1200px-ACSM_logo.svg.png" alt="ACSM" class="h-12">
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm flex items-center justify-center">
+                        <img src="https://www.yogaalliance.org/static/media/ya-logo-square-2021.5a8a9f5c.svg" alt="Yoga Alliance" class="h-12">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Pricing Page -->
+    <div id="pricing-page" class="page-container">
+        <section class="gradient-bg text-white pt-32 pb-20">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Membership Plans</h1>
+                <p class="text-xl max-w-2xl mx-auto">Find the perfect plan for your fitness journey</p>
+            </div>
+        </section>
+
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-16">
+                        <h2 class="text-3xl font-bold mb-4">Choose Your Plan</h2>
+                        <p class="text-gray-600">All plans include access to our mobile app, workout tracking, and community support</p>
+                    </div>
+
+                    <!-- Pricing Toggle -->
+                    <div class="flex justify-center mb-12">
+                        <div class="inline-flex rounded-md shadow-sm" role="group">
+                            <button type="button" class="px-6 py-3 text-sm font-medium rounded-l-lg border border-gray-300 bg-white text-gray-900 hover:bg-gray-50 focus:z-10 focus:ring-2 focus:ring-purple-600">
+                                Monthly Billing
+                            </button>
+                            <button type="button" class="px-6 py-3 text-sm font-medium rounded-r-lg border border-gray-300 bg-purple-600 text-white hover:bg-purple-700 focus:z-10 focus:ring-2 focus:ring-purple-600">
+                                Yearly Billing (Save 20%)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Pricing Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Basic Plan -->
+                        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 text-center">Basic</h3>
+                                <div class="flex justify-center items-end mb-4">
+                                    <span class="text-4xl font-bold">$9</span>
+                                    <span class="text-gray-600 ml-1">/month</span>
+                                </div>
+                                <p class="text-gray-600 text-center mb-6">Essential home workouts for beginners</p>
+                                <ul class="space-y-3 mb-8">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Access to basic workout library</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>New workouts weekly</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Workout tracking</span>
+                                    </li>
+                                    <li class="flex items-center text-gray-400">
+                                        <i class="fas fa-times text-red-400 mr-2"></i>
+                                        <span>Personalized plans</span>
+                                    </li>
+                                    <li class="flex items-center text-gray-400">
+                                        <i class="fas fa-times text-red-400 mr-2"></i>
+                                        <span>Live classes</span>
+                                    </li>
+                                    <li class="flex items-center text-gray-400">
+                                        <i class="fas fa-times text-red-400 mr-2"></i>
+                                        <span>Priority support</span>
+                                    </li>
+                                </ul>
+                                <button class="w-full px-6 py-3 rounded-full border-2 border-purple-600 text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition">Get Started</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Pro Plan -->
+                        <div class="bg-white border-2 border-purple-600 rounded-xl shadow-xl overflow-hidden transform scale-105">
+                            <div class="bg-purple-600 text-white text-center py-2">
+                                <span class="font-semibold">MOST POPULAR</span>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 text-center">Pro</h3>
+                                <div class="flex justify-center items-end mb-4">
+                                    <span class="text-4xl font-bold">$19</span>
+                                    <span class="text-gray-600 ml-1">/month</span>
+                                </div>
+                                <p class="text-gray-600 text-center mb-6">Complete home fitness solution</p>
+                                <ul class="space-y-3 mb-8">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Full workout library access</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>New daily workouts</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Advanced tracking</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-500 mr=2"></i>
+                                        <span>Personalized workout plans</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Live classes</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>Priority support</span>
+                                    </li>
+                                </ul>
+                                <button class="w-full px-6 py-3 rounded-full gradient-bg text-white font-semibold hover:opacity-90 transition">Get Started</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Family Plan -->
+                        <div class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold mb-2 text-center">Family</h3>
+                                <div class="flex justify-center items-end mb-4">
+                                    <span class="text-4xl font-bold">$29</span>
+                                    <span class="text-gray-600 ml-1">/month</span>
+                                </div>
+                                <p class="text-gray-600 text-center mb-6">For households with up to 5 members</p>
+                                <ul class="space-y-3 mb-8">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green-500 mr-2"></i>
+                                        <span>All Pro features</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green=500 mr-2"></i>
+                                        <span>Up to 5 user profiles</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green=500 mr-2"></i>
+                                        <span>Family challenges</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green=500 mr-2"></i>
+                                        <span>Kids workouts</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green=500 mr-2"></i>
+                                        <span>Shared progress tracking</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check text-green=500 mr-2"></i>
+                                        <span>Priority support</span>
+                                    </li>
+                                </ul>
+                                <button class="w-full px-6 py-3 rounded-full border-2 border-purple-600 text-purple-600 font-semibold hover:bg-purple-600 hover:text-white transition">Get Started</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+                        <p class="text-gray-600">Get answers to common questions about FitHome memberships</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- FAQ Item 1 -->
+                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-6 focus:outline-none">
+                                <span class="text-lg font-semibold text-left">Can I cancel my membership anytime?</span>
+                                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6">
+                                <p class="text-gray-600">Yes, you can cancel your membership at any time. There are no cancellation fees or penalties. If you cancel during a billing period, you'll continue to have access until the end of that billing cycle.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 2 -->
+                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-6 focus:outline-none">
+                                <span class="text-lg font-semibold text-left">What payment methods do you accept?</span>
+                                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6">
+                                <p class="text-gray-600">We accept all major credit cards (Visa, Mastercard, American Express, Discover) as well as PayPal. We also support Apple Pay and Google Pay for mobile payments.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 3 -->
+                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-6 focus:outline-none">
+                                <span class="text-lg font-semibold text-left">Is there a free trial available?</span>
+                                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6">
+                                <p class="text-gray-600">Yes! We offer a 30-day free trial for new members. You'll get full access to all features during this period. No credit card is required to start the trial.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 4 -->
+                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-6 focus:outline-none">
+                                <span class="text-lg font-semibold text-left">Can I switch plans later?</span>
+                                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6">
+                                <p class="text-gray-600">Absolutely. You can upgrade or downgrade your plan at any time from your account settings. Changes will take effect at the start of your next billing cycle.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- FAQ Item 5 -->
+                        <div class="border border-gray-200 rounded-lg overflow-hidden">
+                            <button class="faq-toggle w-full flex justify-between items-center p-6 focus:outline-none">
+                                <span class="text-lg font-semibold text-left">Do you offer student or military discounts?</span>
+                                <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-content hidden px-6 pb-6">
+                                <p class="text-gray-600">Yes, we offer 15% discounts for both students and active military personnel. Please contact our support team with proof of status to get your discount applied.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-dumbbell text-2xl"></i>
+                        <span class="text-xl font-bold">FitHome</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Your home fitness solution since 2018.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white nav-item" data-page="about">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white nav-item" data-page="team">Our Team</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Programs</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white nav-item" data-page="programs">All Programs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Beginner Workouts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Advanced Workouts</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Specialty Programs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y=2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Community</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 FitHome. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page navigation functionality
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Hide all pages
+                document.querySelectorAll('.page-container').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show selected page
+                const pageId = this.getAttribute('data-page') + '-page';
+                document.getElementById(pageId).classList.add('active');
+                
+                // Update active nav item
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('nav-highlight');
+                });
+                
+                // Add highlight to clicked nav item (for desktop)
+                if(this.classList.contains('nav-link')) {
+                    this.classList.add('nav-highlight');
+                }
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+        
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if(elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+
+</body>
+</html>
