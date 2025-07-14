@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryLand | Magical Storytelling for Kids</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        storyblue: '#3b82f6',
+                        storypurple: '#8b5cf6',
+                        storypink: '#ec4899',
+                        storyorange: '#f97316',
+                        storyyellow: '#f59e0b',
+                    },
+                    fontFamily: {
+                        'comic': ['"Comic Neue"', 'cursive'],
+                        'nunito': ['Nunito', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .story-card:hover .story-icon {
+            transform: translateY(-5px) rotate(5deg);
+        }
+        .theme-toggle {
+            transition: all 0.3s ease;
+        }
+        .theme-toggle:hover {
+            transform: rotate(15deg);
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="font-nunito bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-200">
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 z-50 flex items-center justify-center bg-white dark:bg-gray-900 transition-opacity duration-500">
+        <div class="w-20 h-20 border-4 border-storypurple border-t-transparent rounded-full animate-spin"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="w-10 h-10 rounded-full bg-storypurple flex items-center justify-center mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </div>
+                <h1 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-storypurple to-storypink font-comic">StoryLand</h1>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#stories" class="font-semibold hover:text-storypurple dark:hover:text-storypink transition">Stories</a>
+                <a href="#features" class="font-semibold hover:text-storypurple dark:hover:text-storypink transition">Features</a>
+                <a href="#testimonials" class="font-semibold hover:text-storypurple dark:hover:text-storypink transition">Reviews</a>
+                <a href="#download" class="font-semibold hover:text-storypurple dark:hover:text-storypink transition">Download</a>
+            </nav>
+            
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="theme-toggle w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+                    <i class="fas fa-moon text-yellow-400 dark:hidden"></i>
+                    <i class="fas fa-sun text-yellow-300 hidden dark:block"></i>
+                </button>
+                <button class="bg-storypurple hover:bg-purple-600 text-white px-4 py-2 rounded-full font-semibold transition transform hover:scale-105">
+                    Get Started
+                </button>
+                <button id="mobile-menu-button" class="md:hidden text-gray-600 dark:text-gray-300">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Off-canvas mobile menu -->
+        <div id="mobile-menu" class="md:hidden fixed inset-0 z-50 hidden bg-gradient-to-b from-white/90 to-purple-50/90 dark:from-gray-900/90 dark:to-gray-800/90">
+            <!-- Menu panel -->
+            <div class="absolute right-0 top-0 h-full w-80 max-w-full bg-gradient-to-b from-white to-purple-50 dark:from-gray-900 dark:to-gray-800 border-l border-gray-200 dark:border-gray-700 shadow-2xl transform transition-transform duration-300 ease-in-out translate-x-full">
+                <div class="flex flex-col h-full p-6">
+                    <div class="flex justify-end mb-8">
+                        <button id="mobile-menu-close" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                            <i class="fas fa-times text-2xl"></i>
+                        </button>
+                    </div>
+                    <nav class="flex flex-col space-y-6">
+                        <a href="#stories" class="text-xl font-semibold hover:text-storypurple dark:hover:text-storypink transition py-2 border-b border-white/20 dark:border-gray-800/50">Stories</a>
+                        <a href="#features" class="text-xl font-semibold hover:text-storypurple dark:hover:text-storypink transition py-2 border-b border-white/20 dark:border-gray-800/50">Features</a>
+                        <a href="#testimonials" class="text-xl font-semibold hover:text-storypurple dark:hover:text-storypink transition py-2 border-b border-white/20 dark:border-gray-800/50">Reviews</a>
+                        <a href="#download" class="text-xl font-semibold hover:text-storypurple dark:hover:text-storypink transition py-2">Download</a>
+                    </nav>
+                    <div class="mt-auto pt-6 border-t border-white/20 dark:border-gray-800/50">
+                        <button class="w-full bg-storypurple hover:bg-purple-600 text-white px-6 py-3 rounded-full font-semibold transition transform hover:scale-105">
+                            Get Started
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 py-16 md:py-24 flex flex-col md:flex-row items-center">
+        <div class="md:w-1/2 mb-12 md:mb-0">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 font-comic">
+                Where Imagination <span class="bg-clip-text text-transparent bg-gradient-to-r from-storypink to-storyorange">Comes Alive</span>
+            </h1>
+            <p class="text-xl mb-8 text-gray-600 dark:text-gray-300 max-w-lg">
+                Spark your child's creativity with interactive stories, magical characters, and endless adventures. Designed for kids aged 3-10.
+            </p>
+            <div class="flex flex-wrap gap-4">
+                <button class="bg-storyorange hover:bg-orange-600 text-white px-8 py-4 rounded-full font-bold text-lg transition transform hover:scale-105 pulse">
+                    Start Reading Now
+                </button>
+                <button class="border-2 border-storypurple text-storypurple dark:text-storypink dark:border-storypink hover:bg-purple-50 dark:hover:bg-gray-800 px-8 py-4 rounded-full font-bold text-lg transition">
+                    <i class="fas fa-play-circle mr-2"></i> Watch Demo
+                </button>
+            </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+            <div class="relative">
+                <div class="absolute -top-10 -left-10 w-32 h-32 bg-yellow-200 dark:bg-yellow-900 rounded-full opacity-30"></div>
+                <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-200 dark:bg-purple-900 rounded-full opacity-30"></div>
+                <div class="relative z-10">
+                    <svg viewBox="0 0 500 400" class="w-full max-w-lg">
+                        <!-- Castle -->
+                        <rect x="150" y="150" width="200" height="150" fill="#8B5CF6" class="dark:fill-purple-800"/>
+                        <rect x="170" y="120" width="40" height="30" fill="#8B5CF6" class="dark:fill-purple-800"/>
+                        <rect x="290" y="120" width="40" height="30" fill="#8B5CF6" class="dark:fill-purple-800"/>
+                        <rect x="200" y="80" width="100" height="70" fill="#8B5CF6" class="dark:fill-purple-800"/>
+                        <polygon points="200,80 250,30 300,80" fill="#EC4899" class="dark:fill-pink-700"/>
+                        
+                        <!-- Characters -->
+                        <circle cx="220" cy="250" r="20" fill="#F59E0B" class="dark:fill-yellow-600"/>
+                        <circle cx="280" cy="250" r="20" fill="#3B82F6" class="dark:fill-blue-600"/>
+                        
+                        <!-- Ground -->
+                        <rect x="0" y="300" width="500" height="100" fill="#10B981" class="dark:fill-green-700"/>
+                        
+                        <!-- Clouds -->
+                        <circle cx="400" cy="100" r="30" fill="white" class="dark:fill-gray-200"/>
+                        <circle cx="430" cy="90" r="25" fill="white" class="dark:fill-gray-200"/>
+                        <circle cx="370" cy="90" r="25" fill="white" class="dark:fill-gray-200"/>
+                        
+                        <!-- Sun -->
+                        <circle cx="80" cy="80" r="40" fill="#F59E0B" class="dark:fill-yellow-500"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-gray-800 dark:to-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 font-comic">Magical Features</h2>
+                <p class="text-xl max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+                    Designed to spark imagination and foster a love for reading
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900 flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-storyblue" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Read-Aloud Stories</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Professional narration brings characters to life with expressive voices and sound effects.
+                    </p>
+                    <div class="flex items-center text-storyblue dark:text-blue-400 font-semibold">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                    <div class="w-16 h-16 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-storypurple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Interactive Characters</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Kids can interact with story characters, make choices, and see how the story changes.
+                    </p>
+                    <div class="flex items-center text-storypurple dark:text-purple-400 font-semibold">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition">
+                    <div class="w-16 h-16 rounded-full bg-pink-100 dark:bg-pink-900 flex items-center justify-center mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-storypink" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Personalized Library</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Curated story recommendations based on your child's age, interests, and reading level.
+                    </p>
+                    <div class="flex items-center text-storypink dark:text-pink-400 font-semibold">
+                        Learn more
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Categories -->
+    <section id="stories" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 font-comic">Explore Magical Worlds</h2>
+                <p class="text-xl max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+                    Hundreds of stories across different genres and interests
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Category 1 -->
+                <div class="story-card bg-gradient-to-br from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20 rounded-2xl p-6 text-center shadow-md hover:shadow-lg transition">
+                    <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                        <div class="story-icon transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-storyorange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Fairy Tales</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Classic stories with princesses, dragons, and magical kingdoms
+                    </p>
+                    <button class="text-storyorange dark:text-orange-400 font-semibold">
+                        Explore <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+                
+                <!-- Category 2 -->
+                <div class="story-card bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-2xl p-6 text-center shadow-md hover:shadow-lg transition">
+                    <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                        <div class="story-icon transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-storypurple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Adventure</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Exciting journeys to mysterious islands and hidden treasures
+                    </p>
+                    <button class="text-storypurple dark:text-purple-400 font-semibold">
+                        Explore <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+                
+                <!-- Category 3 -->
+                <div class="story-card bg-gradient-to-br from-green-50 to-teal-50 dark:from-green-900/20 dark:to-teal-900/20 rounded-2xl p-6 text-center shadow-md hover:shadow-lg transition">
+                    <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                        <div class="story-icon transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Animals</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Heartwarming tales of friendship between animals and humans
+                    </p>
+                    <button class="text-green-500 dark:text-green-400 font-semibold">
+                        Explore <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+                
+                <!-- Category 4 -->
+                <div class="story-card bg-gradient-to-br from-pink-50 to-red-50 dark:from-pink-900/20 dark:to-red-900/20 rounded-2xl p-6 text-center shadow-md hover:shadow-lg transition">
+                    <div class="w-24 h-24 mx-auto mb-6 flex items-center justify-center">
+                        <div class="story-icon transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-storypink" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Funny Stories</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Hilarious tales that will have your kids laughing out loud
+                    </p>
+                    <button class="text-storypink dark:text-pink-400 font-semibold">
+                        Explore <i class="fas fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="py-20 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 font-comic">What Parents & Kids Say</h2>
+                <p class="text-xl max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+                    Join thousands of happy families who discovered the magic of reading
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-purple-200 dark:bg-purple-900 flex items-center justify-center mr-4">
+                            <span class="text-xl font-bold text-storypurple dark:text-purple-300">SJ</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Sarah Johnson</h4>
+                            <p class="text-gray-500 dark:text-gray-400">Mom of Emily, 5</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 italic">
+                        "Emily asks to read stories every night now. The interactive elements keep her engaged and she's even starting to recognize words!"
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-blue-200 dark:bg-blue-900 flex items-center justify-center mr-4">
+                            <span class="text-xl font-bold text-storyblue dark:text-blue-300">MR</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Michael Roberts</h4>
+                            <p class="text-gray-500 dark:text-gray-400">Dad of Liam, 7</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 italic">
+                        "The personalized recommendations are spot on. Liam loves the adventure stories and we've seen his vocabulary improve dramatically."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-pink-200 dark:bg-pink-900 flex items-center justify-center mr-4">
+                            <span class="text-xl font-bold text-storypink dark:text-pink-300">AP</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-lg">Amanda Patel</h4>
+                            <p class="text-gray-500 dark:text-gray-400">Mom of Noah, 4</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 italic">
+                        "The read-aloud feature is a lifesaver on busy days. Noah loves following along and the animations keep him captivated."
+                    </p>
+                    <div class="flex text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download CTA -->
+    <section id="download" class="py-20">
+        <div class="container mx-auto px-4">
+            <div class="bg-gradient-to-r from-storypurple to-storypink rounded-3xl p-12 text-center text-white">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6 font-comic">Start Your Story Adventure Today!</h2>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                    Download StoryLand and unlock hundreds of magical stories for your child
+                </p>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <button class="bg-white text-storypurple px-8 py-4 rounded-full font-bold text-lg flex items-center transition transform hover:scale-105">
+                        <i class="fab fa-apple text-2xl mr-3"></i>
+                        <div>
+                            <div class="text-xs">Download on the</div>
+                            <div class="text-lg">App Store</div>
+                        </div>
+                    </button>
+                    <button class="bg-white text-storypurple px-8 py-4 rounded-full font-bold text-lg flex items-center transition transform hover:scale-105">
+                        <i class="fab fa-google-play text-2xl mr-3"></i>
+                        <div>
+                            <div class="text-xs">Get it on</div>
+                            <div class="text-lg">Google Play</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-full bg-storypurple flex items-center justify-center mr-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                        </div>
+                        <h1 class="text-2xl font-bold font-comic">StoryLand</h1>
+                    </div>
+                    <p class="mb-4">
+                        Sparking imagination and fostering a love for reading in children worldwide.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-pinterest-p"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Explore</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Stories</a></li>
+                        <li><a href="#" class="hover:text-white transition">Categories</a></li>
+                        <li><a href="#" class="hover:text-white transition">New Releases</a></li>
+                        <li><a href="#" class="hover:text-white transition">Popular</a></li>
+                        <li><a href="#" class="hover:text-white transition">Premium</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4">Subscribe</h3>
+                    <p class="mb-4">Get updates on new stories and features</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="bg-gray-800 rounded-l-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-storypurple">
+                        <button class="bg-storypurple hover:bg-purple-600 rounded-r-lg px-4">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p>&copy; 2023 StoryLand. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for kids everywhere.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating elements -->
+    <div class="fixed bottom-6 right-6 floating">
+        <div class="w-16 h-16 rounded-full bg-storyorange flex items-center justify-center shadow-lg">
+            <i class="fas fa-book-open text-white text-2xl"></i>
+        </div>
+    </div>
+
+    <style>
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+
+    <script>
+        // Preloader functionality
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 500); // Minimum show time
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        
+        // Check for saved theme preference or respect OS setting
+        if (localStorage.getItem('theme') === 'dark' || 
+            (!localStorage.getItem('theme') && 
+            window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            htmlElement.classList.toggle('dark');
+            localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileMenuPanel = mobileMenu.querySelector('div > div');
+
+        function openMobileMenu() {
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => {
+                mobileMenu.classList.remove('opacity-0');
+                mobileMenuPanel.classList.remove('translate-x-full');
+            }, 20);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.add('opacity-0');
+            mobileMenuPanel.classList.add('translate-x-full');
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        mobileMenuButton.addEventListener('click', openMobileMenu);
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('#mobile-menu nav a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
