@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmony Dental | Gentle Care for Your Smile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .bg-teal-50 {
+            background-color: #f0fdfa;
+        }
+        .text-teal-800 {
+            color: #115e59;
+        }
+        .border-teal-300 {
+            border-color: #5eead4;
+        }
+        
+        /* Custom smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Pulse animation for CTA */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Image hover effect */
+        .img-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .img-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Navbar animation */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #0d9488;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-gray-800">
+    <!-- Header with Navigation -->
+    <header class="fixed w-full bg-white bg-opacity-90 shadow-sm z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-tooth text-teal-600 text-2xl"></i>
+                    <a href="#" class="text-2xl font-light text-teal-800">Harmony<span class="font-semibold">Dental</span></a>
+                </div>
+                
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-teal-800 hover:text-teal-600">Home</a>
+                    <a href="#services" class="nav-link text-teal-800 hover:text-teal-600">Services</a>
+                    <a href="#team" class="nav-link text-teal-800 hover:text-teal-600">Team</a>
+                    <a href="#testimonials" class="nav-link text-teal-800 hover:text-teal-600">Testimonials</a>
+                    <a href="#contact" class="nav-link text-teal-800 hover:text-teal-600">Contact</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="tel:+11234567890" class="hidden md:flex items-center text-teal-600 hover:text-teal-800">
+                        <i class="fas fa-phone-alt mr-2"></i>
+                        <span>123-456-7890</span>
+                    </a>
+                    <button id="mobile-menu-button" class="md:hidden text-teal-800 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-6 shadow-lg">
+            <div class="flex flex-col space-y-3">
+                <a href="#home" class="nav-link text-teal-800 hover:text-teal-600 py-2">Home</a>
+                <a href="#services" class="nav-link text-teal-800 hover:text-teal-600 py-2">Services</a>
+                <a href="#team" class="nav-link text-teal-800 hover:text-teal-600 py-2">Team</a>
+                <a href="#testimonials" class="nav-link text-teal-800 hover:text-teal-600 py-2">Testimonials</a>
+                <a href="#contact" class="nav-link text-teal-800 hover:text-teal-600 py-2">Contact</a>
+                <a href="tel:+11234567890" class="flex items-center text-teal-600 hover:text-teal-800 py-2">
+                    <i class="fas fa-phone-alt mr-2"></i>
+                    <span>123-456-7890</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 md:pt-40 md:pb-28 bg-teal-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl font-light leading-tight text-teal-800 mb-6">
+                        Gentle Dental Care <br>
+                        <span class="font-semibold">For Your Whole Family</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 max-w-lg">
+                        Experience comfortable, modern dentistry in a calming environment designed to put you at ease.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="#contact" class="bg-teal-600 hover:bg-teal-700 text-white px-8 py-3 rounded-full text-center font-medium transition duration-300 animate-pulse">
+                            Book an Appointment
+                        </a>
+                        <a href="tel:+11234567890" class="border-2 border-teal-300 text-teal-600 hover:bg-teal-50 px-8 py-3 rounded-full text-center font-medium transition duration-300">
+                            <i class="fas fa-phone-alt mr-2"></i>
+                            Call Now
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" 
+                             alt="Dentist with patient" 
+                             class="rounded-lg shadow-xl img-hover w-full max-w-md h-auto">
+                        <div class="absolute -bottom-5 -right-5 bg-white p-4 rounded-lg shadow-lg hidden md:block">
+                            <div class="flex items-center">
+                                <div class="bg-teal-100 p-3 rounded-full mr-3">
+                                    <i class="fas fa-smile-beam text-teal-600 text-xl"></i>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-teal-800">1200+</p>
+                                    <p class="text-sm text-gray-600">Happy Patients</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-light text-teal-800 mb-4">
+                    Our <span class="font-semibold">Dental Services</span>
+                </h2>
+                <div class="w-20 h-1 bg-teal-300 mx-auto"></div>
+                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">
+                    Comprehensive dental care for all ages with the latest technology and gentle techniques.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl">
+                    <div class="h-48 bg-teal-100 flex items-center justify-center">
+                        <i class="fas fa-tooth text-6xl text-teal-600 opacity-20"></i>
+                        <i class="fas fa-teeth-open absolute text-4xl text-teal-600"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-800 mb-3">Preventive Care</h3>
+                        <p class="text-gray-600 mb-4">
+                            Regular check-ups, cleanings, and education to maintain optimal oral health and prevent future problems.
+                        </p>
+                        <a href="#" class="text-teal-600 font-medium inline-flex items-center">
+                            Learn more <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl">
+                    <div class="h-48 bg-teal-100 flex items-center justify-center">
+                        <i class="fas fa-tooth text-6xl text-teal-600 opacity-20"></i>
+                        <i class="fas fa-teeth absolute text-4xl text-teal-600"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-800 mb-3">Cosmetic Dentistry</h3>
+                        <p class="text-gray-600 mb-4">
+                            Whitening, veneers, and smile makeovers to enhance your natural beauty and boost confidence.
+                        </p>
+                        <a href="#" class="text-teal-600 font-medium inline-flex items-center">
+                            Learn more <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 hover:shadow-xl">
+                    <div class="h-48 bg-teal-100 flex items-center justify-center">
+                        <i class="fas fa-tooth text-6xl text-teal-600 opacity-20"></i>
+                        <i class="fas fa-teeth text-4xl text-teal-600 transform rotate-45 absolute"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-800 mb-3">Restorative Services</h3>
+                        <p class="text-gray-600 mb-4">
+                            Fillings, crowns, bridges, and implants to restore function and appearance of damaged teeth.
+                        </p>
+                        <a href="#" class="text-teal-600 font-medium inline-flex items-center">
+                            Learn more <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-teal-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-light text-teal-800 mb-4">
+                    Meet Our <span class="font-semibold">Dental Team</span>
+                </h2>
+                <div class="w-20 h-1 bg-teal-300 mx-auto"></div>
+                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">
+                    Compassionate professionals dedicated to your comfort and oral health.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Dentist 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div class="h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-800">Dr. Sarah Johnson</h3>
+                        <p class="text-gray-500 mb-4">Lead Dentist</p>
+                        <p class="text-gray-600 text-sm">
+                            With over 15 years of experience, Dr. Johnson specializes in cosmetic and preventive dentistry.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Dentist 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div class="h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1594824476967-48c8b964273f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80');"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-800">Dr. Michael Chen</h3>
+                        <p class="text-gray-500 mb-4">Oral Surgeon</p>
+                        <p class="text-gray-600 text-sm">
+                            Expert in dental implants and complex extractions with a gentle approach.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Hygienist -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div class="h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80');"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-800">Emily Rodriguez</h3>
+                        <p class="text-gray-500 mb-4">Dental Hygienist</p>
+                        <p class="text-gray-600 text-sm">
+                            Provides thorough yet comfortable cleanings and personalized oral care advice.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Assistant -->
+                <div class="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div class="h-64 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80');"></div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-teal-800">David Wilson</h3>
+                        <p class="text-gray-500 mb-4">Dental Assistant</p>
+                        <p class="text-gray-600 text-sm">
+                            Ensures your comfort during procedures with a calming presence and attention to detail.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-light text-teal-800 mb-4">
+                    Patient <span class="font-semibold">Testimonials</span>
+                </h2>
+                <div class="w-20 h-1 bg-teal-300 mx-auto"></div>
+                <p class="mt-6 text-gray-600 max-w-2xl mx-auto">
+                    Hear what our patients say about their experience at Harmony Dental.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0">
+                            <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Patient" class="h-12 w-12 rounded-full">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-teal-800">Lisa Thompson</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "I used to have severe dental anxiety, but the team at Harmony Dental changed everything. They're patient, gentle, and explain every step. Now I actually look forward to my check-ups!"
+                    </p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Patient" class="h-12 w-12 rounded-full">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-teal-800">Robert Garcia</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "The cosmetic work Dr. Johnson did transformed my smile. The process was comfortable and the results exceeded my expectations. I get compliments daily!"
+                    </p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="flex-shrink-0">
+                            <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Patient" class="h-12 w-12 rounded-full">
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="text-lg font-medium text-teal-800">Megan Patel</h4>
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic">
+                        "Bringing my kids here was the best decision. They love the friendly staff and the prize box at the end. No more dental visit meltdowns!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Section -->
+    <section class="py-20 bg-teal-800 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-light mb-6">
+                Ready for a <span class="font-semibold">Healthier Smile?</span>
+            </h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto">
+                Schedule your appointment today and experience gentle, personalized dental care.
+            </p>
+            <a href="#contact" class="bg-white text-teal-800 hover:bg-teal-50 px-8 py-3 rounded-full font-medium transition duration-300 inline-block animate-pulse">
+                Request an Appointment
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h2 class="text-3xl font-light text-teal-800 mb-6">
+                        Contact <span class="font-semibold">Harmony Dental</span>
+                    </h2>
+                    <div class="w-20 h-1 bg-teal-300 mb-6"></div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-teal-100 p-3 rounded-full mr-4 flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-teal-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-teal-800 mb-1">Our Location</h4>
+                                <p class="text-gray-600">123 Wellness Boulevard<br>Springfield, ST 12345</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-teal-100 p-3 rounded-full mr-4 flex-shrink-0">
+                                <i class="fas fa-phone-alt text-teal-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-teal-800 mb-1">Phone Number</h4>
+                                <p class="text-gray-600">(123) 456-7890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-teal-100 p-3 rounded-full mr-4 flex-shrink-0">
+                                <i class="fas fa-envelope text-teal-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-teal-800 mb-1">Email Address</h4>
+                                <p class="text-gray-600">info@harmonydental.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-teal-100 p-3 rounded-full mr-4 flex-shrink-0">
+                                <i class="fas fa-clock text-teal-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-medium text-teal-800 mb-1">Office Hours</h4>
+                                <p class="text-gray-600">
+                                    Monday - Friday: 8:00 AM - 5:00 PM<br>
+                                    Saturday: 9:00 AM - 2:00 PM<br>
+                                    Sunday: Closed
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 md:pl-10">
+                    <form id="appointment-form" class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold text-teal-800 mb-6">Book an Appointment</h3>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 mb-2">Full Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-300 focus:border-transparent" required>
+                            </div>
+                            
+                            <div>
+                                <label for="email" class="block text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-300 focus:border-transparent" required>
+                            </div>
+                            
+                            <div>
+                                <label for="phone" class="block text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-300 focus:border-transparent" required>
+                            </div>
+                            
+                            <div>
+                                <label for="service" class="block text-gray-700 mb-2">Service</label>
+                                <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-300 focus:border-transparent">
+                                    <option value="checkup">Regular Checkup</option>
+                                    <option value="cleaning">Dental Cleaning</option>
+                                    <option value="whitening">Teeth Whitening</option>
+                                    <option value="filling">Filling</option>
+                                    <option value="crown">Crown</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="md:col-span-2">
+                                <label for="message" class="block text-gray-700 mb-2">Message (Optional)</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-300 focus:border-transparent"></textarea>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-teal-600 hover:bg-teal-700 text-white py-3 rounded-lg mt-6 font-medium transition duration-300">
+                            Request Appointment
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-teal-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-tooth text-2xl"></i>
+                        <span class="text-2xl font-light">Harmony<span class="font-semibold">Dental</span></span>
+                    </div>
+                    <p class="text-teal-100 mb-6">
+                        Providing compassionate, high-quality dental care in a relaxing environment since 2010.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-teal-100 hover:text-white text-xl">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-teal-100 hover:text-white text-xl">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-teal-100 hover:text-white text-xl">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-teal-100 hover:text-white text-xl">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-teal-100 hover:text-white">Home</a></li>
+                        <li><a href="#services" class="text-teal-100 hover:text-white">Services</a></li>
+                        <li><a href="#team" class="text-teal-100 hover:text-white">Our Team</a></li>
+                        <li><a href="#testimonials" class="text-teal-100 hover:text-white">Testimonials</a></li>
+                        <li><a href="#contact" class="text-teal-100 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-teal-100 hover:text-white">Preventive Care</a></li>
+                        <li><a href="#" class="text-teal-100 hover:text-white">Cosmetic Dentistry</a></li>
+                        <li><a href="#" class="text-teal-100 hover:text-white">Restorative Services</a></li>
+                        <li><a href="#" class="text-teal-100 hover:text-white">Orthodontics</a></li>
+                        <li><a href="#" class="text-teal-100 hover:text-white">Emergency Care</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-teal-800 mt-10 pt-8 text-center text-teal-100">
+                <p>&copy; 2023 Harmony Dental. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#home" id="back-to-top" class="fixed bottom-8 right-8 bg-teal-600 text-white p-3 rounded-full shadow-lg hover:bg-teal-700 transition duration-300 hidden">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            const backToTopButton = document.getElementById('back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('hidden');
+            } else {
+                backToTopButton.classList.add('hidden');
+            }
+        });
+
+        // Form submission
+        document.getElementById('appointment-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your appointment request! We will contact you shortly to confirm your visit.');
+            this.reset();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (!mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
