@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glow Haven - Saloon & Spa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F5F1;
+            color: #4A4A4A;
+            overflow-x: hidden; /* Prevent horizontal scroll when off-canvas menu is open */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        .hero-section {
+            background-image: linear-gradient(rgba(45, 45, 45, 0.6), rgba(45, 45, 45, 0.6)), url('https://placehold.co/1920x1080/D1B69B/1c1917?text=');
+            background-size: cover;
+            background-position: center;
+        }
+        .section-heading::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background-color: #C084FC;
+            margin: 10px auto 0;
+            border-radius: 9999px;
+            transform: scaleX(0);
+            animation: expand-line 1s ease-out forwards;
+        }
+        @keyframes expand-line {
+            to { transform: scaleX(1); }
+        }
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            animation: fade-in 1s ease-out forwards;
+            opacity: 0;
+        }
+        .card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fade-in 1s ease-out forwards;
+        }
+        @keyframes fade-in {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .off-canvas-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s ease-in-out;
+        }
+        .off-canvas-menu.open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Fixed Header/Navigation Menu -->
+    <nav class="fixed top-0 left-0 w-full bg-white bg-opacity-90 shadow-lg z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <!-- Logo/Brand Name -->
+            <a href="#" class="text-3xl font-bold font-serif text-gray-800 hover:text-gray-900 transition-colors duration-300">Glow Haven</a>
+
+            <!-- Desktop Menu -->
+            <ul class="hidden md:flex space-x-8">
+                <li><a href="#services" class="text-lg font-medium text-gray-700 hover:text-violet-500 transition-colors duration-300">Services</a></li>
+                <li><a href="#about" class="text-lg font-medium text-gray-700 hover:text-violet-500 transition-colors duration-300">About Us</a></li>
+                <li><a href="#gallery" class="text-lg font-medium text-gray-700 hover:text-violet-500 transition-colors duration-300">Gallery</a></li>
+                <li><a href="#testimonials" class="text-lg font-medium text-gray-700 hover:text-violet-500 transition-colors duration-300">Testimonials</a></li>
+                <li><a href="#contact" class="text-lg font-medium text-gray-700 hover:text-violet-500 transition-colors duration-300">Contact</a></li>
+            </ul>
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" class="md:hidden flex items-center p-2 rounded-md text-gray-700 hover:bg-gray-200 transition-colors duration-300 focus:outline-none">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Off-Canvas Mobile Menu -->
+    <div id="off-canvas-menu" class="off-canvas-menu fixed top-0 right-0 h-full w-64 bg-white shadow-xl z-50 flex flex-col justify-between p-6">
+        <div>
+            <div class="flex justify-end mb-8">
+                <button id="close-menu-button" class="text-gray-700 hover:bg-gray-200 rounded-full p-2">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <ul class="flex flex-col space-y-4">
+                <li><a href="#services" class="text-lg font-medium text-gray-700 hover:text-violet-500 transition-colors duration-300 py-2 block">Services</a></li>
+                <li><a href="#about" class="text-lg font-medium text-gray-700 hover:text-violet-500 transition-colors duration-300 py-2 block">About Us</a></li>
+                <li><a href="#gallery" class="text-lg font-medium text-gray-700 hover:text-violet-500 transition-colors duration-300 py-2 block">Gallery</a></li>
+                <li><a href="#testimonials" class="text-lg font-medium text-gray-700 hover:text-violet-500 transition-colors duration-300 py-2 block">Testimonials</a></li>
+                <li><a href="#contact" class="text-lg font-medium text-gray-700 hover:text-violet-500 transition-colors duration-300 py-2 block">Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div class="flex justify-center space-x-6 pb-6 border-t border-gray-200 mt-auto pt-6">
+            <a href="#" class="text-gray-500 hover:text-violet-500 transition-colors duration-300">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.618 1.493 4.766 4.745.059 1.267.07 1.647.07 4.85s-.012 3.584-.07 4.85c-.148 3.252-1.493 4.618-4.745 4.766-1.267.059-1.647.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.618-1.493-4.766-4.745-.059-1.267-.07-1.647-.07-4.85s.012-3.584.07-4.85c.148-3.252 1.493-4.618 4.745-4.766 1.267-.059 1.647-.07 4.85-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.209-6.78 2.62-6.989 6.988-.058 1.28-.072 1.688-.072 4.947s.014 3.667.072 4.947c.209 4.358 2.62 6.78 6.989 6.988 1.28.058 1.688.072 4.947.072s3.667-.014 4.947-.072c4.358-.209 6.78-2.62 6.988-6.989.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.209-4.358-2.62-6.78-6.988-6.989-1.28-.058-1.688-.072-4.947-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.162 6.162 6.162 6.162-2.759 6.162-6.162-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4s1.791-4 4-4 4 1.79 4 4-1.791 4-4 4zm6.406-11.845c-.796 0-1.442.645-1.442 1.442s.646 1.442 1.442 1.442 1.442-.645 1.442-1.442-.646-1.442-1.442-1.442z"/></svg>
+            </a>
+            <a href="#" class="text-gray-500 hover:text-violet-500 transition-colors duration-300">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.675 3.325h-2.909v3.085h2.909v2.545h-2.909v2.545h-2.545v-2.545h-2.545v-2.545h2.545v-3.085h-2.909v-2.545h2.909v-2.545c0-1.503.743-2.545 2.545-2.545h2.545v2.545h-2.545c-.752 0-1.127.375-1.127 1.127v1.418h3.636l-.636 2.545h-3.001v2.545h2.545v2.545h-2.545v-2.545h-2.545v2.545h2.545v2.545h-2.545v2.545h-2.545v-2.545h-2.545v-2.545h-2.545v-2.545h2.545v-2.545h-2.545v-3.085h2.909v-2.545h-2.909v-2.545c0-1.503.743-2.545 2.545-2.545h2.545v2.545zM22.675 3.325h-2.909v3.085h2.909v2.545h-2.909v2.545h-2.545v-2.545h-2.545v-2.545h2.545v-3.085h-2.909v-2.545h2.909v-2.545c0-1.503.743-2.545 2.545-2.545h2.545v2.545h-2.545c-.752 0-1.127.375-1.127 1.127v1.418h3.636l-.636 2.545h-3.001v2.545h2.545v2.545h-2.545v2.545h-2.545v-2.545h-2.545v-2.545h-2.545v-2.545h2.545v-2.545z"/></svg>
+            </a>
+            <a href="#" class="text-gray-500 hover:text-violet-500 transition-colors duration-300">
+                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16.942 6.785c-1.39-1.39-3.64-1.39-5.03 0l-3.32 3.32-2.31-2.31c-1.39-1.39-3.64-1.39-5.03 0-1.39 1.39-1.39 3.64 0 5.03l2.31 2.31 3.32 3.32c1.39 1.39 3.64 1.39 5.03 0 1.39-1.39 1.39-3.64 0-5.03l-2.31-2.31-3.32-3.32c-1.39-1.39-3.64-1.39-5.03 0-1.39 1.39-1.39 3.64 0 5.03l2.31 2.31 3.32 3.32c1.39 1.39 3.64 1.39 5.03 0 1.39-1.39 1.39-3.64 0-5.03l-2.31-2.31-3.32-3.32c-1.39-1.39-3.64-1.39-5.03 0-1.39 1.39-1.39 3.64 0 5.03l2.31 2.31 3.32 3.32c1.39 1.39 3.64 1.39 5.03 0 1.39-1.39 1.39-3.64 0-5.03l-2.31-2.31-3.32-3.32c-1.39-1.39-3.64-1.39-5.03 0-1.39 1.39-1.39 3.64 0 5.03l2.31 2.31 3.32 3.32c1.39 1.39 3.64 1.39 5.03 0 1.39-1.39 1.39-3.64 0-5.03z"/></svg>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Hero Section with smooth fade-in animation -->
+    <header class="hero-section text-white min-h-screen flex flex-col justify-center items-center text-center p-6 sm:p-8 pt-24">
+        <h1 class="text-5xl sm:text-6xl lg:text-8xl font-bold mb-4 fade-in" style="animation-delay: 0.2s;">Glow Haven</h1>
+        <p class="text-lg sm:text-xl lg:text-2xl mb-8 max-w-2xl fade-in" style="animation-delay: 0.5s;">
+            Where elegance meets tranquility. Experience our exclusive range of bespoke saloon and spa services.
+        </p>
+        <a href="#services" class="bg-violet-400 hover:bg-violet-500 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg fade-in" style="animation-delay: 0.8s;">
+            Explore Our Services
+        </a>
+    </header>
+
+    <main>
+        <!-- Services Section with improved layout and icons -->
+        <section id="services" class="py-16 bg-white pt-24">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12 section-heading">Our Services & Pricing</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service Card 1: Hair Care -->
+                    <div class="card bg-stone-50 p-6 rounded-2xl shadow-md" style="animation-delay: 1s;">
+                        <div class="flex flex-col items-center text-center space-y-4 mb-4">
+                            <div class="bg-fuchsia-100 p-4 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-fuchsia-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="8" cy="18" r="4" /><path d="M12 18V2" /><path d="M10 2l-6 16" /><path d="M14 2l6 16" /><path d="M17 18a4 4 0 100-8" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-semibold">Hair Care</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-3 mt-4">
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Haircut & Styling</span> <span class="font-medium">$50</span></li>
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Coloring & Highlights</span> <span class="font-medium">$120+</span></li>
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Hair Treatments</span> <span class="font-medium">$80+</span></li>
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Blowout & Updos</span> <span class="font-medium">$45</span></li>
+                        </ul>
+                    </div>
+                    <!-- Service Card 2: Skincare -->
+                    <div class="card bg-stone-50 p-6 rounded-2xl shadow-md" style="animation-delay: 1.2s;">
+                        <div class="flex flex-col items-center text-center space-y-4 mb-4">
+                            <div class="bg-fuchsia-100 p-4 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-fuchsia-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2a.5.5 0 01.5.5V5a.5.5 0 01-1 0V2.5a.5.5 0 01.5-.5zM12 19a.5.5 0 00-.5.5V22a.5.5 0 001 0v-2.5a.5.5 0 00-.5-.5z" /><path d="M19.5 7a.5.5 0 00-.5.5V11a.5.5 0 001 0V7.5a.5.5 0 00-.5-.5zM4.5 7a.5.5 0 01.5.5V11a.5.5 0 01-1 0V7.5a.5.5 0 01.5-.5z" /><path d="M17 12a5 5 0 11-10 0 5 5 0 0110 0z" /><path d="M17 12a3 3 0 11-6 0 3 3 0 016 0z" /><path d="M22 12a.5.5 0 00-.5-.5H20a.5.5 0 000 1h1.5a.5.5 0 00.5-.5z" /><path d="M2 12a.5.5 0 01.5-.5H4a.5.5 0 010 1H2.5a.5.5 0 01-.5-.5z" /><path d="M12 17.5a5.5 5.5 0 110-11 5.5 5.5 0 010 11z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-semibold">Skincare</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-3 mt-4">
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Custom Facial</span> <span class="font-medium">$90+</span></li>
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Chemical Peel</span> <span class="font-medium">$150+</span></li>
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Microdermabrasion</span> <span class="font-medium">$110</span></li>
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>LED Light Therapy</span> <span class="font-medium">$60</span></li>
+                        </ul>
+                    </div>
+                    <!-- Service Card 3: Spa Treatments -->
+                    <div class="card bg-stone-50 p-6 rounded-2xl shadow-md" style="animation-delay: 1.4s;">
+                        <div class="flex flex-col items-center text-center space-y-4 mb-4">
+                            <div class="bg-fuchsia-100 p-4 rounded-full">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-fuchsia-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2a.5.5 0 01.5.5V5a.5.5 0 01-1 0V2.5a.5.5 0 01.5-.5z" /><path d="M12 19a.5.5 0 00-.5.5V22a.5.5 0 001 0v-2.5a.5.5 0 00-.5-.5z" /><path d="M19.5 7a.5.5 0 00-.5.5V11a.5.5 0 001 0V7.5a.5.5 0 00-.5-.5zM4.5 7a.5.5 0 01.5.5V11a.5.5 0 01-1 0V7.5a.5.5 0 01.5-.5z" /><path d="M17 12a5 5 0 11-10 0 5 5 0 0110 0z" /><path d="M17 12a3 3 0 11-6 0 3 3 0 016 0z" /><path d="M22 12a.5.5 0 00-.5-.5H20a.5.5 0 000 1h1.5a.5.5 0 00.5-.5z" /><path d="M2 12a.5.5 0 01.5-.5H4a.5.5 0 010 1H2.5a.5.5 0 01-.5-.5z" /><path d="M12 17.5a5.5 5.5 0 110-11 5.5 5.5 0 010 11z" />
+                                </svg>
+                            </div>
+                            <h3 class="text-2xl font-semibold">Spa Treatments</h3>
+                        </div>
+                        <ul class="text-gray-600 space-y-3 mt-4">
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Swedish Massage (60min)</span> <span class="font-medium">$100</span></li>
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Deep Tissue Massage (60min)</span> <span class="font-medium">$120</span></li>
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Hot Stone Massage</span> <span class="font-medium">$140</span></li>
+                            <li class="flex justify-between items-center border-b border-gray-200 pb-3"><span>Body Scrub & Wrap</span> <span class="font-medium">$110</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-16 bg-stone-100 pt-24">
+            <div class="container mx-auto px-4 flex flex-col-reverse md:flex-row items-center gap-12">
+                <div class="w-full md:w-1/2">
+                    <img src="https://placehold.co/600x400/94A79D/white?text=About+Us" alt="About Glow Haven" class="rounded-2xl shadow-xl w-full h-auto card" style="animation-delay: 1.6s;">
+                </div>
+                <div class="w-full md:w-1/2 text-center md:text-left card" style="animation-delay: 1.8s;">
+                    <h2 class="text-4xl font-bold mb-4">About Our Philosophy</h2>
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        At Glow Haven, we believe in a holistic approach to beauty and wellness. Our mission is to create a serene sanctuary where you can escape the stresses of daily life and emerge feeling refreshed, rejuvenated, and confident. Our team of expert stylists and estheticians is dedicated to providing personalized care tailored to your unique needs. We use only the highest quality products to ensure exceptional results.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-16 bg-white pt-24">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12 section-heading">Our Work</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="card overflow-hidden rounded-lg shadow-md" style="animation-delay: 2s;">
+                        <img src="https://placehold.co/400x400/D1B69B/white?text=Hair+Styling+1" alt="Hair Styling" class="w-full h-64 object-cover card-image">
+                    </div>
+                    <div class="card overflow-hidden rounded-lg shadow-md" style="animation-delay: 2.2s;">
+                        <img src="https://placehold.co/400x400/96B0A8/white?text=Facial+Treatment" alt="Facial Treatment" class="w-full h-64 object-cover card-image">
+                    </div>
+                    <div class="card overflow-hidden rounded-lg shadow-md" style="animation-delay: 2.4s;">
+                        <img src="https://placehold.co/400x400/E5D4C3/white?text=Massage" alt="Massage" class="w-full h-64 object-cover card-image">
+                    </div>
+                    <div class="card overflow-hidden rounded-lg shadow-md" style="animation-delay: 2.6s;">
+                        <img src="https://placehold.co/400x400/B8C3AB/white?text=Manicure" alt="Manicure" class="w-full h-64 object-cover card-image">
+                    </div>
+                    <div class="card overflow-hidden rounded-lg shadow-md" style="animation-delay: 2.8s;">
+                        <img src="https://placehold.co/400x400/D1B69B/white?text=Hair+Styling+2" alt="Hair Styling" class="w-full h-64 object-cover card-image">
+                    </div>
+                    <div class="card overflow-hidden rounded-lg shadow-md" style="animation-delay: 3.0s;">
+                        <img src="https://placehold.co/400x400/96B0A8/white?text=Spa+Experience" alt="Spa Experience" class="w-full h-64 object-cover card-image">
+                    </div>
+                    <div class="card overflow-hidden rounded-lg shadow-md" style="animation-delay: 3.2s;">
+                        <img src="https://placehold.co/400x400/E5D4C3/white?text=Pedicure" alt="Pedicure" class="w-full h-64 object-cover card-image">
+                    </div>
+                    <div class="card overflow-hidden rounded-lg shadow-md" style="animation-delay: 3.4s;">
+                        <img src="https://placehold.co/400x400/B8C3AB/white?text=Client+Photo" alt="Client Photo" class="w-full h-64 object-cover card-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-16 bg-stone-100 pt-24">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12 section-heading">What Our Clients Say</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card bg-white p-6 rounded-2xl shadow-md text-center" style="animation-delay: 3.6s;">
+                        <p class="text-xl font-serif text-gray-700 italic mb-4">"The best salon experience I've ever had. The staff is professional, and the atmosphere is incredibly relaxing."</p>
+                        <p class="font-semibold text-gray-800">- Jane Doe</p>
+                    </div>
+                    <div class="card bg-white p-6 rounded-2xl shadow-md text-center" style="animation-delay: 3.8s;">
+                        <p class="text-xl font-serif text-gray-700 italic mb-4">"My skin has never looked better. The custom facial was a game changer. Highly recommend Glow Haven!"</p>
+                        <p class="font-semibold text-gray-800">- John Smith</p>
+                    </div>
+                    <div class="card bg-white p-6 rounded-2xl shadow-md text-center" style="animation-delay: 4.0s;">
+                        <p class="text-xl font-serif text-gray-700 italic mb-4">"A true sanctuary. The hot stone massage was exactly what I needed to de-stress. I'll definitely be back."</p>
+                        <p class="font-semibold text-gray-800">- Emily Clark</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 bg-white pt-24">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-12 section-heading">Book Your Appointment</h2>
+                <div class="max-w-xl mx-auto bg-stone-50 p-8 rounded-2xl shadow-lg card" style="animation-delay: 4.2s;">
+                    <form>
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400">
+                        </div>
+                        <div class="mb-4">
+                            <label for="service" class="block text-gray-700 font-medium mb-2">Service of Interest</label>
+                            <select id="service" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400">
+                                <option>Haircut & Styling</option>
+                                <option>Custom Facial</option>
+                                <option>Swedish Massage</option>
+                                <option>Manicure & Pedicure</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 font-medium mb-2">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="bg-violet-400 hover:bg-violet-500 text-white font-semibold py-3 px-8 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-8">
+            <div class="container mx-auto px-4 text-center">
+                <p>&copy; 2024 Glow Haven. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </main>
+    
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const offCanvasMenu = document.getElementById('off-canvas-menu');
+        const closeMenuButton = document.getElementById('close-menu-button');
+        const mobileLinks = offCanvasMenu.querySelectorAll('a');
+
+        mobileMenuButton.addEventListener('click', () => {
+            offCanvasMenu.classList.add('open');
+        });
+
+        closeMenuButton.addEventListener('click', () => {
+            offCanvasMenu.classList.remove('open');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                offCanvasMenu.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
