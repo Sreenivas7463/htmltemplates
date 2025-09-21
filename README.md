@@ -5,3 +5,4 @@ Html Web Templates
 3. [Elite Nexus](https://sreenivas7463.github.io/htmltemplates/eliteexus.html){:target="_blank"}
 4. [Dental Template](https://sreenivas7463.github.io/htmltemplates/dental_template.html){:target="_blank"}
 5. [Saloon SPA Template](https://sreenivas7463.github.io/htmltemplates/Saloon.html){:target="_blank"}
+6. [Restaurant](https://sreenivas7463.github.io/htmltemplates/Restaurant.html){:target="_blank"}
